@@ -59,11 +59,13 @@ class CRM
   end
 
   def delete_contact
-
+    puts "Enter id of contact to delete"
+    id = gets.chomp.to_i
+    Contact.delete(id)
   end
 
   def display_all_contacts
-
+    puts Contact.all.inspect
   end
 
   def search_by_attribute
@@ -72,3 +74,8 @@ class CRM
 
 
 end
+
+
+new_crm = CRM.new("best")
+
+new_crm.main_menu

@@ -21,7 +21,7 @@ class Contact
 
   # This method should return all of the existing contacts
   def self.all
-
+    @@contacts
   end
 
   # This method should accept an id as an argument
@@ -57,8 +57,9 @@ class Contact
 
   # This method should delete the contact
   # HINT: Check the Array class docs for built-in methods that might be useful here
-  def delete
-
+  def self.delete(id)
+    to_delete = @@contacts.find{|contact| contact.read_id == id}
+    @@contacts.delete(to_delete)
   end
   def email
     @email
@@ -72,7 +73,9 @@ class Contact
   def last_name
     @last_name
   end
-
+  def read_id
+    @id
+  end
   # Feel free to add other methods here, if you need them.
 
 end
