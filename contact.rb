@@ -1,4 +1,4 @@
-gem "activerecord", "=4.1.9"
+gem "activerecord", "=4.2.7"
 
 require 'active_record'
 require 'mini_record'

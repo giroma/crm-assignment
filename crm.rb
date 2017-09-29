@@ -58,7 +58,22 @@ class CRM
   end
 
   def modify_existing_contact
-
+    puts "Enter contact id to modify"
+    contact_id = gets.chomp.to_i
+    puts contact = Contact.find(contact_id)
+    search_menu
+    user_selected = gets.chomp.to_i
+    case user_selected
+    when 1 then user_attribute = 'first_name'
+    when 2 then user_attribute = 'last_name'
+    when 3 then user_attribute = 'email'
+    when 4 then user_attribute = 'note'
+    when 5 then user_attribute = 'id'
+    when 6 then exit
+    end
+    puts "enter new value"
+    new_value = gets.chomp
+    puts contact.update(user_attribute.to_sym => new_value).inspect
   end
 
   def delete_contact
@@ -72,29 +87,32 @@ class CRM
   end
 
   def search_by_attribute
-    search menu
+    search_menu
     user_selected = gets.to_i
     search_option(user_selected)
-    Contact.find_by
   end
   def search_menu
-    puts '[1] Search by first name'
-    puts '[2] Search by last name'
-    puts '[3] Search by email'
-    puts '[4] Search by note'
-    puts '[5] Search by id'
+    puts '[1] for first name'
+    puts '[2] for last name'
+    puts '[3] for email'
+    puts '[4] for note'
+    puts '[5] for id'
     puts '[6] Exit'
     puts 'Enter a number: '
   end
   def search_option(user_selected)
+
     case user_selected
-    when 1 then Contact.find_by(:first_name)
-    when 2 then Contact.find_by(:last_name)
-    when 3 then Contact.find_by(:email)
-    when 4 then Contact.find_by(:note)
-    when 5 then Contact.find(:id)
+    when 1 then user_attribute = 'first_name'
+    when 2 then user_attribute = 'last_name'
+    when 3 then user_attribute = 'email'
+    when 4 then user_attribute = 'note'
+    when 5 then user_attribute = 'id'
     when 6 then exit
     end
+    puts "enter value for search:"
+    search_for = gets.chomp
+    puts Contact.find_by(user_attribute.to_sym => search_for).inspect
   end
 end
 
