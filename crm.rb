@@ -32,9 +32,7 @@ class CRM
     when 4 then display_all_contacts
     when 5 then search_by_attribute
     when 6 then exit
- # Finish off the rest for 3 through 6
- # To be clear, the methods add_new_contact and modify_existing_contact
- # haven't been implemented yet
+
     end
   end
 
@@ -85,12 +83,13 @@ class CRM
   end
   def search_option(user_selected)
     case user_selected
-    when 1 then Contact.find_by()
-    when 2 then Contact.find_by
-    when 3 then Contact.find_by
-    when 4 then Contact.find_by
-    when 5 then Contact.find_by
+    when 1 then Contact.find_by(:first_name)
+    when 2 then Contact.find_by(:last_name)
+    when 3 then Contact.find_by(:email)
+    when 4 then Contact.find_by(:note)
+    when 5 then Contact.find(:id)
     when 6 then exit
+    end
   end
 end
 
@@ -98,3 +97,7 @@ end
 new_crm = CRM.new("best")
 
 new_crm.main_menu
+
+at_exit do
+  ActiveRecord::Base.connection.close
+end
